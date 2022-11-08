@@ -1,20 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native';
-
-import * as ExpoSettings from 'expo-settings';
+import * as Settings from "expo-settings";
+import { Button, Text, View } from "react-native";
 
 export default function App() {
+  const theme = Settings.getTheme();
+  // Toggle between dark and light theme
+  const nextTheme = theme === "dark" ? "light" : "dark";
+
   return (
-    <View style={styles.container}>
-      <Text>{ExpoSettings.hello()}</Text>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Theme: {Settings.getTheme()}</Text>
+      <Button
+        title={`Set theme to ${nextTheme}`}
+        onPress={() => Settings.setTheme(nextTheme)}
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
